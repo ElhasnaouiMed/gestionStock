@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="utf-8" />
+<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript" src="../static/js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+.mrgb {
+	padding-bottom: 20px;
+}
+
+.center_div {
+	margin: 0 auto;
+	width: 80% /* value of your choice which suits your alignment */
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container center_div">
+
+			<h3 th:text="#{auth}"></h3>
+
+			<div class="alert alert-danger" th:if="${param.error}" th:text="#{invaliduser}">Invalid
+				username and password.</div>
+			<div class="alert alert-danger" th:if="${param.logout}"  th:text="#{deconnect}">You
+				have been logged out.</div>
+			<form class="mx-auto" th:action="@{/login}" method="post">
+				<div class="form-group">
+					<label th:text="#{username}" for="username"></label> <input class="form-control"
+						type="text" name="username" />
+				</div>
+				<div class="form-group">
+					<label th:text="#{password}" for="password"></label> <input class="form-control"
+						type="password" name="password" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" th:text="#{signin}" /></button>
+				</div>
+				<div th:unless="${#lists.isEmpty(user)}">
+				<script type="text/javascript">
+						$('#log').hide();;				
+				</script>
+				
+				</div>
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

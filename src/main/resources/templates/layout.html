@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript" src="../static/js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<title th:text="#{title}">Insert title here</title>
+
+<style type="text/css">
+.color-footer {
+	color: white;
+}
+
+img {
+	padding-bottom: 4px;
+	padding-right: 4px;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/home}" th:text="#{home}"></a></li>
+					<li><a th:href="@{/admin/delivery}" th:text="#{delivery}"></a></li>
+					<li><a th:href="@{/stock}" th:text="#{stock}"></a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right" id="log">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false"
+						th:text="#{language}"> </a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="?lang=fr" class="language"><img
+									th:src="@{fr.png}" /><span th:text="#{fr}"></span></a></li>
+							<li><a href="?lang=en" class="language"><img
+									th:src="@{en.png}" /><span th:text="#{en}"></span></a></li>
+						</ul></li>
+
+					<!-- li><a href="#" th:text="#{signUp}"> Sign Up</a></li>
+					<li><a href="#" th:text="#{login}"> Login</a></li-->
+					<li><a th:href="@{/logout}" th:text="#{logout}">
+							Logout</a></li>
+
+
+				</ul>
+			</div>
+		</nav>
+
+	</header>
+
+	<section layout:fragment="content"></section>
+
+	<footer class="navbar-fixed-bottom navbar-inverse">
+		<div class="container">
+			<div class="footer-copyright text-center py-3">
+				<small class="color-footer">© 2020 Copyright: Mask delivery</small>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
