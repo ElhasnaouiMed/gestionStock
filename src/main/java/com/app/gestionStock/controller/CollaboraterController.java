@@ -14,11 +14,13 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.gestionStock.dto.CollaboraterDTO;
@@ -40,6 +42,7 @@ import com.app.gestionStock.service.MaskServiceImpl;
  *
  */
 @Controller
+@RequestMapping
 public class CollaboraterController {
 
 	@Autowired
@@ -77,6 +80,12 @@ public class CollaboraterController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
+		List<DeliveryCollaboraterDTO> dt = getDeliveryCollab();
+		model.addAttribute("deliveries", dt);
+		return "home";
+	}
+
+	private List<DeliveryCollaboraterDTO> getDeliveryCollab() {
 		List<Object[]> deliv = deliveryService.getAllDelivery();
 		List<DeliveryCollaboraterDTO> dt = new ArrayList<DeliveryCollaboraterDTO>();
 
@@ -100,8 +109,7 @@ public class CollaboraterController {
 			}
 			dt.add(dtt);
 		});
-		model.addAttribute("deliveries", dt);
-		return "home";
+		return dt;
 	}
 
 
@@ -200,17 +208,7 @@ public class CollaboraterController {
 		return "stock";
 	}
 
-	/**
-	 * Transforme un entity Collaborater en un POJO CollaboraterDTO
-	 * 
-	 * @param collaborater
-	 * @return
-	 */
-	private CollaboraterDTO mapCollaboraterToCollaboraterDTO(Collaborater collaborater) {
-		ModelMapper mapper = new ModelMapper();
-		CollaboraterDTO customerDTO = mapper.map(collaborater, CollaboraterDTO.class);
-		return customerDTO;
-	}
+
 
 	/**
 	 * Transforme un POJO CollaboraterDTO en entity Collaborater
@@ -242,17 +240,7 @@ public class CollaboraterController {
 		return delivery;
 	}
 
-	/**
-	 * Transforme un entity Delivery en un POJO DeliveryDTO
-	 * 
-	 * @param delivery
-	 * @return
-	 */
-	private SimpleDeliveryDTO mapDeliveryToDeliveryDTO(Delivery delivery) {
-		ModelMapper mapper = new ModelMapper();
-		SimpleDeliveryDTO customerDTO = mapper.map(delivery, SimpleDeliveryDTO.class);
-		return customerDTO;
-	}
+
 
 	/**
 	 * Transform entity Mask to POJO MaskDTO
